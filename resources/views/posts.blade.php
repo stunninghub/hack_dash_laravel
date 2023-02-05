@@ -19,9 +19,11 @@ Posts
             <h4>Add new post</h4>
 
             <div class="hd_form">
-                <input type="text" name="title" id="title" class="hd_field" placeholder="Post title">
-                <textarea name="description" id="description" cols="30" rows="10" class="hd_field" placeholder="Write something..."></textarea>
-                <button type="submit" class="hd_btn_primary">Publish</button>
+                <form action="" method="POST" id="hd_add_new_post_form">
+                    <input type="text" name="title" id="title" class="hd_field" placeholder="Post title">
+                    <textarea name="description" id="description" cols="30" rows="10" class="hd_field" placeholder="Write something..."></textarea>
+                    <button type="submit" class="hd_btn_primary">Publish</button>
+                </form>
             </div>
         </div>
     </div>
@@ -29,6 +31,10 @@ Posts
 
 
 <script>
+    $(document).on('submit', '#hd_add_new_post_form', function(e){
+        e.preventDefault();
+    });
+    
     $(document).on('click', '.hd_add_new_post', function() {
         $('.hd_add_post_modal').show();
         $('.hd_add_post_modal_overlay').fadeIn(200, function() {

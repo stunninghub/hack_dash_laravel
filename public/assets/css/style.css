@@ -1,9 +1,38 @@
+.hd_dashboard_at_glance {
+    display: grid;
+    gap: 10px;
+    grid-template-areas: 'banner banner'
+        'content_l content_r';
+}
+
+.left_content {
+    grid-area: content_l;
+}
+
+.right_content {
+    grid-area: content_r;
+}
+
+.empty_glance_widget {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: #eee;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+    margin: 10p;
+}
+
 .hack_dash_welcome_banner {
     background: linear-gradient(172deg, #19255c, #281032);
     color: #fff;
     padding: 40px;
     border-radius: 10px;
+    grid-area: banner;
 }
+
 
 .hack_dash_welcome_banner p {
     color: rgba(255, 255, 255, 0.6);
@@ -169,4 +198,8 @@
     padding: 10px 14px;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.hd_field:focus-visible {
+    outline: 1px solid #7cbeff;
 }
