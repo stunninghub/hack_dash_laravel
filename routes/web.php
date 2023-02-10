@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+// use App\Http\Controllers\AjaxController as AddPost;
+use App\Http\Controllers\PostController as AddPost;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,5 +26,10 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 Route::get('/posts', function () {
-    return view('posts');
+    $posts = DB::table('post')->select('*')->orderBy('id', 'DESC')->get();
+    return view('posts', compact('posts'));
 })->name('posts');
+
+
+Route::any('/add_post', [AddPost::class, 'insert']);
+Route::any('/get_posts', [AddPost::class, 'get_posts']);

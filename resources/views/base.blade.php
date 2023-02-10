@@ -34,9 +34,7 @@
             @include('sidebar')
         </div>
         <div class="hack_dash_control_right_wrap">
-            <div class="">
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
     </div>
 
