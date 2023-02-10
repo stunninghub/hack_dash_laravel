@@ -16,7 +16,7 @@ class PostController extends BaseController
         $updated_at = date('Y-m-d H:i:s');
         $data = array('title' => $title, "content" => $content, "created_at" => $created_at, "updated_at" => $updated_at);
         if (DB::table('post')->insert($data)) {
-            $posts = DB::table('post')->select('*')->get();
+            $posts = DB::table('post')->select('*')->orderBy('id', 'DESC')->get();
             echo json_encode(array(
                 "status"    => 200,
                 "message"   => "Post published",
