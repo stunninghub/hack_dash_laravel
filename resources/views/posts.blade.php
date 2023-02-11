@@ -1,4 +1,4 @@
-@extends('base')
+@extends('adminbase')
 
 @section('title')
 Posts

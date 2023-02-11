@@ -1,20 +1,28 @@
 @extends('base')
 
 @section('title')
-Login
+Register
 @endsection
 
 @section('content')
 <div class="hd_login_form_wrap">
     <div class="hd_login_form_wrap_inner">
         <div class="hd_login_header">
-            <h4>Login to Hack Dash</h4>
+            <h4>Register for Hack Dash</h4>
         </div>
-        <form action="/" id="hd_login_form" class="hd_login_form">
+        <form action="/" id="hd_reg_form" class="hd_login_form">
             @csrf
+            <div class="hd_field_wrap">
+                <label for="fullname">Full name:</label>
+                <input type="text" name="fullname" id="fullname" class="fullname hd_input" autofocus>
+            </div>
             <div class="hd_field_wrap">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" class="username hd_input" autofocus>
+            </div>
+            <div class="hd_field_wrap">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="email hd_input" autofocus>
             </div>
             <div class="hd_field_wrap">
                 <label for="password">Password:</label>
@@ -33,9 +41,9 @@ Login
                 </div>
             </div>
             <div class="hd_field_wrap">
-                <button type="submit" class="hd_btn_primary">Login</button>
+                <button type="submit" class="hd_btn_primary">Register</button>
             </div>
-            <p>Don't have an account? <a href="/register">Register</a>.</p>
+            <p>Already have an account? <a href="/login">Login</a>.</p>
         </form>
     </div>
 </div>
@@ -53,13 +61,13 @@ Login
         }
     });
 
-    $('#hd_login_form').submit(function(e) {
+    $('#hd_reg_form').submit(function(e) {
         e.preventDefault();
         let this_form = $(this),
             this_form_data = new FormData($(this).get(0));
 
         $.ajax({
-            url: '/ajax_login_attempt',
+            url: '/ajax_reg_attempt',
             type: "POST",
             data: this_form_data,
             cache: false,
@@ -73,22 +81,14 @@ Login
                 });
             }
         }).done((res) => {
-            if (res.status == 200) {
-                this_form.find('[type=submit]').text('Logged in')
-                this_form.find('[type=submit]').css({
-                    'opacity': 1,
-                    'pointer-events': 'all'
-                });
-                window.location.href = res.redirect;
-            } else {
-                this_form.find('[type=submit]').text('Retry login')
-                this_form.find('[type=submit]').css({
-                    'opacity': 1,
-                    'pointer-events': 'all'
-                });
-            }
+            this_form.find('[type=submit]').text('Logged in')
+            this_form.find('[type=submit]').css({
+                'opacity': 1,
+                'pointer-events': 'all'
+            });
+            console.log(res);
         }).fail((err) => {
-            this_form.find('[type=submit]').text('Retry login')
+            this_form.find('[type=submit]').text('Login')
             this_form.find('[type=submit]').css({
                 'opacity': 1,
                 'pointer-events': 'all'
