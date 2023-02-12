@@ -88,6 +88,7 @@ Posts
                     `;
                 });
                 this_form.find('button[type=submit]').text('Published');
+                this_form.get(0).reset();
                 $('.hd_posts_table .hd_table_body').html(posts);
                 setTimeout(function() {
                     $('.close_hd_modal').trigger('click');

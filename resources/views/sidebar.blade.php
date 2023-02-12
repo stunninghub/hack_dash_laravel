@@ -7,13 +7,13 @@
             <a href="/posts" @if(Route::current()->getName() == 'posts')class="active"@endif >Posts</a>
         </li>
         <li>
-            <a href="javascript:;" @if(Route::current()->getName() == 'users')class="active"@endif >Users</a>
+            <a href="/users" @if(Route::current()->getName() == 'users')class="active"@endif >Users</a>
         </li>
         <li>
-            <a href="javascript:;" @if(Route::current()->getName() == 'settings')class="active"@endif >Settings</a>
+            <a href="/settings" @if(Route::current()->getName() == 'settings')class="active"@endif >Settings</a>
         </li>
         <li>
-            <a href="javascript:;" @if(Route::current()->getName() == 'profile')class="active"@endif >Profile</a>
+            <a href="/profile" @if(Route::current()->getName() == 'profile')class="active"@endif >Profile</a>
         </li>
     </ul>
 </div>

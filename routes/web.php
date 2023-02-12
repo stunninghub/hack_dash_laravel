@@ -42,6 +42,18 @@ Route::group(['middleware' => ['auth']], function () {
         $posts = DB::table('post')->select('*')->orderBy('id', 'DESC')->get();
         return view('posts', compact('posts', 'user_name'));
     })->name('posts');
+    Route::get('/users', function () {
+        $user_name = Auth::user()->name;
+        return view('users', compact('user_name'));
+    })->name('users');
+    Route::get('/settings', function () {
+        $user_name = Auth::user()->name;
+        return view('settings', compact('user_name'));
+    })->name('settings');
+    Route::get('/profile', function () {
+        $user_name = Auth::user()->name;
+        return view('profile', compact('user_name'));
+    })->name('profile');
 });
 
 
