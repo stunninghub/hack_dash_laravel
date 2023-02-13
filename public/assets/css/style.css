@@ -176,11 +176,26 @@ body {
     background: #1a2144;
     position: fixed;
     width: 100%;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0px 6px 15px #00000014;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     color: #fff;
     font-size: 14px;
+}
+
+.hack_dash_control_header .menu_toggle_btn img {
+    width: 25px;
+    filter: invert(1);
+}
+
+.user_info_wrap .menu_toggle_btn {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.user_info_wrap .greetings {
+    display: inline-block;
 }
 
 .hack_dash_control_panel {
@@ -188,7 +203,7 @@ body {
     height: 100vh;
     width: 100%;
     position: fixed;
-    top: 42px;
+    top: 62px;
     left: 0px;
 }
 
@@ -197,10 +212,9 @@ body {
     width: 100%;
 }
 
-.hack_dash_control_light_wrap {
-    min-width: 200px;
+.hack_dash_control_left_wrap {
     background: #171d3a;
-    padding: 25px 0px;
+    padding: 4px 0px;
 }
 
 .hack_dash_side_items ul {
@@ -216,7 +230,7 @@ body {
     display: block;
     background: rgba(255, 255, 255, 0.04);
     margin-bottom: 4px;
-    padding: 10px 20px;
+    padding: 10px 10px 10px 0px;
     border-radius: 8px;
     border: 4px solid #171d3a;
     border-bottom: 0px;
@@ -235,7 +249,31 @@ body {
     background: dodgerblue;
 }
 
+.hack_dash_side_items ul li a span {
+    padding: 0px 10px;
+    display: inline-block;
+    transform: translateY(-2px);
+    margin-left: 2px;
+}
 
+.hack_dash_side_items ul li a span img {
+    width: 18px;
+    filter: invert(1);
+}
+
+.hack_dash_side_items {
+    min-width: 50px;
+    max-width: 200px;
+    width: 200px;
+}
+
+.hack_dash_side_items.slim {
+    width: 50px;
+}
+
+.hack_dash_side_items.slim span.menu_label {
+    display: none;
+}
 
 .hd_add_post_modal,
 .hd_add_post_modal_overlay,

@@ -21,9 +21,14 @@
     @include('header')
     <div class="hack_dash_control_header">
         <div class="d-flex justify-content-between">
-            <span>
-                Welcome {{ $user_name }}
-            </span>
+            <div class="user_info_wrap">
+                <div class="menu_toggle_btn">
+                    <img src="{{URL::asset('/assets/img/menu_bars.svg')}}" alt="">
+                </div>
+                <div class="greetings">
+                    Welcome {{ $user_name }}
+                </div>
+            </div>
             <span>
                 <a href="{{ url('/logout') }}" style="color:#fff;">
                     Logout
@@ -32,7 +37,7 @@
         </div>
     </div>
     <div class="hack_dash_control_panel">
-        <div class="hack_dash_control_light_wrap">
+        <div class="hack_dash_control_left_wrap">
             @include('sidebar')
         </div>
         <div class="hack_dash_control_right_wrap">
@@ -41,6 +46,11 @@
     </div>
 
     <script src="{{URL::asset('/assets/js/hd_script.js')}}"></script>
+    <script>
+        $('.menu_toggle_btn').click(function(){
+            $('.hack_dash_side_items').toggleClass('slim');
+        })
+    </script>
 </body>
 
 </html>

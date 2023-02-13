@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller as MainControl;
 use App\Http\Controllers\AjaxController as MainAjax;
 use App\Http\Controllers\PostController as AddPost;
+use App\Http\Controllers\UserMeta;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -44,7 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('posts');
     Route::get('/users', function () {
         $user_name = Auth::user()->name;
-        return view('users', compact('user_name'));
+        $meta = Usermeta::get('dummy');
+        return view('users', compact('user_name', 'meta'));
     })->name('users');
     Route::get('/settings', function () {
         $user_name = Auth::user()->name;
