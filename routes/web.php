@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('posts');
     Route::get('/users', function () {
         $user_name = Auth::user()->name;
-        $meta = Usermeta::get('dummy');
+        $meta = Usermeta::get();
         return view('users', compact('user_name', 'meta'));
     })->name('users');
     Route::get('/settings', function () {

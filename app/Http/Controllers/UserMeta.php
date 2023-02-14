@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class UserMeta extends BaseController
 {
-    public static function get($key = null)
+    public static function get($user_id = null)
     {
         $usr_id = Auth::user()->id;
-        $user_meta = DB::table('usermeta')->select('*')->where('user_id', $usr_id)->where('key', $key)->get();
-        return $user_meta;
+        $ftchd_meta = array();
+        $user_meta = DB::table('usermeta')->select('*')->where('user_id', $usr_id)->get();
+        foreach ($user_meta as $meta) {
+            $ftchd_meta[$meta->key] = $meta->value;
+        }
+        return $ftchd_meta;
     }
 }
