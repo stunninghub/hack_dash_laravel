@@ -36,22 +36,41 @@ Route::get('/logout', [MainControl::class, 'hd_logout']);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function () {
         $user_name = Auth::user()->name;
-        return view('manage', compact('user_name'));
+        $recent_posts = AddPost::get_all_posts('desc', 4);
+        return view('manage', compact('user_name', 'recent_posts'));
     })->name('home');
     Route::get('/posts', function () {
         $user_name = Auth::user()->name;
-        $posts = DB::table('post')->select('*')->orderBy('id', 'DESC')->get();
+        $user_id = Auth::user()->id;
+        $posts = AddPost::get_all_posts('asc', -1, $user_id);
         return view('posts', compact('posts', 'user_name'));
     })->name('posts');
     Route::get('/users', function () {
         $user_name = Auth::user()->name;
         $meta = Usermeta::get();
-        return view('users', compact('user_name', 'meta'));
+        $all_usrs = UserMeta::all_users();
+        return view('users', compact('user_name', 'meta', 'all_usrs'));
     })->name('users');
-    Route::get('/settings', function () {
+
+    Route::get('/settings/', function () {
         $user_name = Auth::user()->name;
-        return view('settings', compact('user_name'));
+        $subpage = "";
+        return view('settings', compact('user_name', 'subpage'));
     })->name('settings');
+
+    Route::get('/settings/{subpage}', function ($subpage) {
+        $user_name = Auth::user()->name;
+        switch ($subpage) {
+            case "profile":
+                return view('settings-profile', compact('user_name', 'subpage'));
+                break;
+            default:
+                return view('settings', compact('user_name', 'subpage'));
+                break;
+        }
+        return view('settings', compact('user_name', 'subpage'));
+    })->name('settings');
+
     Route::get('/profile', function () {
         $user_name = Auth::user()->name;
         return view('profile', compact('user_name'));

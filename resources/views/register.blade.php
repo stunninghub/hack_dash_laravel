@@ -81,12 +81,14 @@ Register
                 });
             }
         }).done((res) => {
-            this_form.find('[type=submit]').text('Logged in')
-            this_form.find('[type=submit]').css({
-                'opacity': 1,
-                'pointer-events': 'all'
-            });
-            console.log(res);
+            if (res.status == 200) {
+                this_form.find('[type=submit]').text('Logged in')
+                this_form.find('[type=submit]').css({
+                    'opacity': 1,
+                    'pointer-events': 'all'
+                });
+                window.location.href = res.redirect;
+            }
         }).fail((err) => {
             this_form.find('[type=submit]').text('Login')
             this_form.find('[type=submit]').css({

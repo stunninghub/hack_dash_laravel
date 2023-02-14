@@ -12,8 +12,5 @@
         <li>
             <a href="/settings" @if(Route::current()->getName() == 'settings')class="active"@endif ><span class="menu_icon"><img src="{{URL::asset('/assets/img/settings.svg')}}"></span><span class="menu_label">Settings</span></a>
         </li>
-        <li>
-            <a href="/profile" @if(Route::current()->getName() == 'profile')class="active"@endif ><span class="menu_icon"><img src="{{URL::asset('/assets/img/dash_profile.svg')}}"></span><span class="menu_label">Profile</span></a>
-        </li>
     </ul>
 </div>

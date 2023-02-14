@@ -19,4 +19,9 @@ class UserMeta extends BaseController
         }
         return $ftchd_meta;
     }
+    public static function all_users()
+    {
+        $all_users = DB::table('users')->select('*')->get();
+        return $all_users;
+    }
 }

@@ -61,11 +61,25 @@ class AjaxController extends BaseController
         $user->email = $request->input('email');
         $user->username = $request->input('username');
         $user->name = $request->input('fullname');
+        $user->metadata = '';
         if ($user->save()) {
-            return array(
-                "status"    => 200,
-                "message"   => "Registeration success."
-            );
+            $credentials = $request->validate([
+                "username"  => $request->input('username'),
+                "password"  => Hash::make($request->input('password')),
+            ]);
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+                return array(
+                    "status"    => 200,
+                    "message"   => "Logged In.",
+                    "redirect"   => "/"
+                );
+            } else {
+                return array(
+                    "status"    => 500,
+                    "message"   => "Not logged In."
+                );
+            }
         } else {
             return array(
                 "status"    => 500,

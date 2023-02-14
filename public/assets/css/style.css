@@ -106,7 +106,28 @@ body {
     border-radius: 10px;
     border: 1px solid #bbb;
     margin: 10p;
+    overflow: hidden;
 }
+
+.filled_glance_widget {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+    overflow: hidden;
+}
+
+.hd_glance_recent_posts_wrap {
+    width: 100%;
+}
+
+.hd_glance_recent_posts_wrap th.hd_th {
+    border-radius: 0px !important;
+}
+
 
 .hack_dash_welcome_banner {
     background: linear-gradient(172deg, #19255c, #281032);
@@ -374,4 +395,57 @@ tr.hd_tr:nth-child(even) {
 
 table.hd_posts_table {
     width: 100%;
+}
+
+
+
+
+
+.hd_dash_settings_wrap {
+    display: flex;
+}
+
+.hd_dash_settings_sidebar {
+    min-width: 200px;
+}
+
+.dash_set_sidebar_banner {
+    margin: 20px 0px;
+}
+
+.hd_dash_settings_content {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.hd_dash_settings_sidebar ul {
+    padding: 0px;
+    list-style: none;
+    padding-right: 14px;
+}
+
+.hd_dash_settings_sidebar {
+    min-width: 200px;
+    border-right: 1px solid #e1e1e1;
+    height: 88vh;
+}
+
+.hd_dash_settings_sidebar ul li a {
+    width: 100%;
+    background: #eee;
+    display: block;
+    padding: 5px 14px;
+    text-decoration: none;
+    color: #333;
+    margin-bottom: 2px;
+    border-radius: 4px;
+}
+
+.hd_dash_settings_sidebar ul li.active a {
+    background: #6ec371;
+    color: #fff;
+}
+
+.hd_dash_settings_sidebar ul li:not(.hd_dash_settings_sidebar ul li.active) a:hover {
+    background: #e3e3e3;
 }
