@@ -46,11 +46,61 @@
         </div>
     </div>
 
+    <div class="hd_confirm_pop">
+        <div class="hd_confirm_pop_inner">
+            <div class="hd_confirm_title">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            </div>
+            <div class="hd_confirm_choices">
+                <button class="hd_btn_primary hd_confirm_positive">Confirm</button>
+                <button class="hd_btn_secondary hd_confirm_negative">Cancel</button>
+            </div>
+        </div>
+    </div>
     <script src="{{URL::asset('/assets/js/hd_script.js')}}"></script>
     <script>
-        $('.menu_toggle_btn').click(function(){
+        $('.menu_toggle_btn').click(function() {
             $('.hack_dash_side_items').toggleClass('slim');
         });
+
+
+
+        var hd_confirm_positive_callback = "";
+
+        function hd_confirm(title = null, callback = null) {
+            title = (title != null) ? title : "Are you sure?";
+            jQuery('.hd_confirm_title').text(title);
+            jQuery('.hd_confirm_pop').addClass('active');
+
+            hd_confirm_positive_callback = function() {
+                if (callback != null) {
+                    callback();
+                }
+                jQuery('.hd_confirm_pop').removeClass('active');
+                jQuery('.hd_confirm_title').text("");
+                console.log(jQuery._data(document.querySelector('.hd_confirm_positive'), "events"));
+                if (jQuery._data(document.querySelector('.hd_confirm_positive'), "events")) {
+                    $('.hd_confirm_positive').off('click');
+                }
+                if (jQuery._data(document.querySelector('.hd_confirm_negative'), "events")) {
+                    $('.hd_confirm_negative').off('click');
+                }
+            }
+            jQuery('.hd_confirm_positive').on('click', hd_confirm_positive_callback);
+
+            hd_confirm_negative_callback = function() {
+                jQuery('.hd_confirm_pop').removeClass('active');
+                jQuery('.hd_confirm_title').text("");
+                if (jQuery._data(document.querySelector('.hd_confirm_negative'), "events")) {
+                    $('.hd_confirm_negative').off('click');
+                }
+                if (jQuery._data(document.querySelector('.hd_confirm_positive'), "events")) {
+                    $('.hd_confirm_positive').off('click');
+                }
+            }
+            jQuery('.hd_confirm_negative').on('click', hd_confirm_negative_callback);
+
+        }
     </script>
 </body>
 

@@ -449,3 +449,81 @@ table.hd_posts_table {
 .hd_dash_settings_sidebar ul li:not(.hd_dash_settings_sidebar ul li.active) a:hover {
     background: #e3e3e3;
 }
+
+
+span.hd_dash_tbl_remove_user {
+    width: 12px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 8px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+span.hd_dash_tbl_remove_user img {
+    width: 100%;
+}
+
+.hd_dash_user_item:hover .hd_dash_tbl_remove_user {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hd_confirm_pop {
+    position: fixed;
+    z-index: 999;
+    width: 380px;
+    height: 140px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -280px;
+    box-shadow: 0px 10px 80px #00000036;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+}
+
+.hd_confirm_pop.active {
+    top: 20px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.hd_confirm_pop_inner {
+    position: relative;
+    height: 100%;
+}
+
+.hd_confirm_choices {
+    display: flex;
+    gap: 18px;
+    margin-top: 18px;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+
+.hd_confirm_choices button {
+    width: 100%;
+}
+
+button.hd_btn_secondary:hover {
+    background: #6fcaff82;
+}
+
+button.hd_btn_secondary {
+    display: inline-block;
+    background: #d2e9ff;
+    padding: 6px 16px;
+    border-radius: 4px;
+    border: 1px solid rgb(148 184 251);
+    text-decoration: none;
+    color: rgb(0 90 255);
+    font-size: 14px;
+    transition: all 0.15s;
+}
