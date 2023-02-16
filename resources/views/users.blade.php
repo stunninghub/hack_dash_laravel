@@ -23,27 +23,47 @@ Users
                     @foreach($all_usrs as $user)
                     <tr class="hd_tr hd_dash_user_item">
                         <td class="hd_td">{{ $user->id }}</td>
-                        <td class="hd_td">{{ $user->email }} <span class="hd_dash_tbl_remove_user" hd-data-usr_id="{{ $user->id }}"><img src="{{URL::asset('/assets/img/remove_user.svg')}}" alt=""></span></td>
+                        <td class="hd_td">{{ $user->email }}
+                            @if($user->id != $user_id)
+                            <span class="hd_dash_tbl_remove_user" hd-data-usr_id="{{ $user->id }}">
+                                <img src="{{URL::asset('/assets/img/remove_user.svg')}}" alt="" style="pointer-events: none;">
+                            </span>
+                            @endif
+                        </td>
                         <td class="hd_td">{{ $user->created_at }}</td>
                         <td class="hd_td">{{ $user->updated_at }}</td>
                     </tr>
                     @endforeach
                 </tbody>
-                <div class="dmy_txt"></div>
-                <button class="hd_btn_primary" onclick="hd_confirm('This is notice message...', add_test_text);">Click me</button>
-                <button class="hd_btn_secondary" onclick="hd_confirm('This is notice message...', add_test_2_text);">Click 2 me</button>
             </table>
         </div>
     </div>
 </div>
 
 <script>
-    function add_test_text() {
-        jQuery('.dmy_txt').append('Alert Triggerd<br><br>');
-    }
-
-    function add_test_2_text() {
-        jQuery('.dmy_txt').append('Alert Two Triggerd<br>');
-    }
+    jQuery('.hd_dash_tbl_remove_user').click(function() {
+        var this_btn = jQuery(this);
+        var this_user_id = jQuery(this).attr('hd-data-usr_id');
+        hd_confirm('Are you sure you want to remove this user from hack dash?', function() {
+            jQuery.ajax({
+                url: "/delete_user",
+                type: "POST",
+                data: {
+                    user_id: this_user_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            }).done((res) => {
+                if (res['status'] == 200) {
+                    this_btn.parent().parent().remove();
+                } else {
+                    console.log(res);
+                }
+            }).fail((err) => {
+                console.log(err);
+            });
+        });
+    });
 </script>
 @endsection

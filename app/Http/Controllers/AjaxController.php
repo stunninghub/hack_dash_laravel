@@ -87,4 +87,20 @@ class AjaxController extends BaseController
             );
         }
     }
+
+    public function delete_user(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        if (DB::table('users')->where('id', '=', $user_id)->delete()) {
+            return array(
+                "status"    => 200,
+                "message"   => "User has been removed."
+            );
+        } else {
+            return array(
+                "status"    => 500,
+                "message"   => "User not removed."
+            );
+        }
+    }
 }

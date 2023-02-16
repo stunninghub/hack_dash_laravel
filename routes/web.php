@@ -7,6 +7,8 @@ use App\Http\Controllers\PostController as AddPost;
 use App\Http\Controllers\UserMeta;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\DataCollector\AjaxDataCollector;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,7 @@ Route::get('/register', function () {
 })->name('register');
 Route::any('/ajax_login_attempt', [MainAjax::class, 'hd_login']);
 Route::any('/ajax_reg_attempt', [MainAjax::class, 'hd_register']);
+Route::any('/delete_user', [MainAjax::class, 'delete_user']);
 
 Route::get('/logout', [MainControl::class, 'hd_logout']);
 
@@ -47,9 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('posts');
     Route::get('/users', function () {
         $user_name = Auth::user()->name;
+        $user_id = Auth::user()->id;
         $meta = Usermeta::get();
         $all_usrs = UserMeta::all_users();
-        return view('users', compact('user_name', 'meta', 'all_usrs'));
+        return view('users', compact('user_id', 'user_name', 'meta', 'all_usrs'));
     })->name('users');
 
     Route::get('/settings/', function () {
