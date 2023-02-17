@@ -101,6 +101,29 @@
             jQuery('.hd_confirm_negative').on('click', hd_confirm_negative_callback);
 
         }
+
+        function hd_notice(title, type = null) {
+            var notice_badge = "";
+            switch (type) {
+                case "positive":
+                    notice_badge = "positive"
+                    break;
+                case "danger":
+                    notice_badge = "danger"
+                    break;
+                case "warning":
+                    notice_badge = "warning"
+                    break;
+                default:
+                    notice_badge = ""
+                    break;
+            }
+            $('.hd_notice_wrap').append(`<div class="hd_notice_item ${notice_badge}">${title}<span class="close_btn">&times;</span></div>`);
+        }
+
+        $(document).on('click', '.hd_notice_item .close_btn', function() {
+            $(this).parent().remove();
+        })
     </script>
 </body>
 

@@ -79,8 +79,24 @@ Route::group(['middleware' => ['auth']], function () {
         $user_name = Auth::user()->name;
         return view('profile', compact('user_name'));
     })->name('profile');
+
+
+    Route::get('/post/edit/{id}', function ($id) {
+        $user_name = Auth::user()->name;
+        $post = AddPost::get_post_by_id(($id));
+        $post_title = json_decode($post['post'], true)[0]['title'];
+        $post_content = json_decode($post['post'], true)[0]['content'];
+        $post_created_date = date('d M Y, h:i A', strtotime(json_decode($post['post'], true)[0]['created_at']));
+        $post_updated_date = date('d M Y, h:i A', strtotime(json_decode($post['post'], true)[0]['updated_at']));
+        return view('edit-post', compact('user_name', 'id', 'post_title', 'post_content', 'post_created_date', 'post_updated_date'));
+    })->name('edit_post');
+    Route::get('/post/new', function () {
+        $user_name = Auth::user()->name;
+        return view('new-post', compact('user_name'));
+    })->name('new_post');
 });
 
 
 Route::any('/add_post', [AddPost::class, 'insert']);
+Route::any('/update_post', [AddPost::class, 'update']);
 Route::any('/get_posts', [AddPost::class, 'get_posts']);

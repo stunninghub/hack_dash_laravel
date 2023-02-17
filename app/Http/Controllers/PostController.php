@@ -17,18 +17,39 @@ class PostController extends BaseController
         $updated_at = date('Y-m-d H:i:s');
         $usr_id = Auth::user()->id;
         $data = array('title' => $title, "content" => $content, "created_at" => $created_at, "updated_at" => $updated_at, 'user_id' => $usr_id);
-        if (DB::table('post')->insert($data)) {
+        if ($id = DB::table('post')->insertGetId($data)) {
             $user_id = Auth::user()->id;
-            $posts = DB::table('post')->select('*')->where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
+            // $posts = DB::table('post')->select('*')->where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
+            // $posts = DB::table('post')->select('LAST_INSERT_ID;')->where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
             echo json_encode(array(
                 "status"    => 200,
                 "message"   => "Post published",
-                "posts"     => $posts
+                "id"     => $id
             ));
         } else {
             echo json_encode(array(
                 "status"    => 500,
                 "message"   => "Post Not Published",
+            ));
+        }
+    }
+    public function update(Request $request)
+    {
+        $post_id = $request->input('post_id');
+        $title = $request->input('title');
+        $content = $request->input('description');
+        $updated_at = date('Y-m-d H:i:s');
+        $usr_id = Auth::user()->id;
+        $data = array('title' => $title, "content" => $content,  "updated_at" => $updated_at);
+        if ($id = DB::table('post')->where('id', '=', $post_id)->update($data)) {
+            echo json_encode(array(
+                "status"    => 200,
+                "message"   => "Post updated"
+            ));
+        } else {
+            echo json_encode(array(
+                "status"    => 500,
+                "message"   => "Post Not Updated",
             ));
         }
     }
@@ -48,5 +69,15 @@ class PostController extends BaseController
         $limit = $limit ?: -1;
         $user_id = $user_id ?: Auth::user()->id;
         return DB::table('post')->select('*')->where('user_id', '=', $user_id)->orderBy('id', $orderby)->limit($limit)->get();
+    }
+    public static function get_post_by_id($id)
+    {
+        $user_id = Auth::user()->id;
+        $post = DB::table('post')->select('*')->where('user_id', '=', $user_id)->where('id', '=', $id)->get();
+        return array(
+            "status"    => 200,
+            "message"   => "Fetched Successfuly",
+            "post"   => $post,
+        );
     }
 }

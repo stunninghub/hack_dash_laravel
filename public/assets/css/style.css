@@ -527,3 +527,111 @@ button.hd_btn_secondary {
     font-size: 14px;
     transition: all 0.15s;
 }
+
+
+
+/** EDIT POST START **/
+.hd_post_edit_inner_wrap {
+    display: flex;
+    gap: 10px;
+}
+
+.hd_field_wrap {
+    margin-bottom: 10px;
+}
+
+.hd_input {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 4PX;
+}
+
+.post_edit_right_sidebar {
+    min-width: 240px;
+}
+
+.post_edit_left_content {
+    width: 100%;
+}
+
+.hd_input:focus-visible {
+    outline: 2px solid #b7caf1;
+}
+
+.hd_post_edit_sidebar_block {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+.hd_post_edit_sidebar_block .block_title {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.hd_post_edit_sidebar_block .block_content {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.hd_notice_item {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 14px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hd_notice_item:after {
+    content: '';
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.hd_notice_item.positive:after {
+    background: #72c922;
+}
+
+.hd_notice_item.danger:after {
+    background: #d66620;
+}
+
+.hd_notice_item.warning:after {
+    background: #ffdb12;
+}
+
+.hd_notice_item .close_btn {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: #aaa;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.hd_notice_item .close_btn:hover {
+    background: #eee;
+}
+
+/** EDIT POST START END **/

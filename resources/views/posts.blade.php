@@ -6,7 +6,7 @@ Posts
 
 @section('content')
 <h5 style="display: inline;margin-right: 10px;">All Posts</h5>
-<a href="javascript:;" class="hd_btn_primary_lined hd_add_new_post">Add new</a>
+<a href="/post/new" class="hd_btn_primary_lined hd_add_new_post_hold">Add new</a>
 <div class="hd_mang_posts_table_wrap">
     <div class="hd_posts_table_inner">
         <table class="hd_posts_table">
@@ -23,7 +23,7 @@ Posts
                 @foreach($posts as $post)
                 <tr class="hd_tr">
                     <td class="hd_td">{{ $post->id }}</td>
-                    <td class="hd_td">{{ $post->title }}</td>
+                    <td class="hd_td"><a href="/post/edit/{{ $post->id }}">{{ $post->title }}</a></td>
                     <td class="hd_td">{{ $post->created_at }}</td>
                     <td class="hd_td">{{ $post->updated_at }}</td>
                 </tr>
