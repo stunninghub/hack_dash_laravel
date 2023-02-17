@@ -9,9 +9,10 @@ Hi there! This project would be helpful for the freshers who are building there 
 First you need to download this project and extract the .zip files in a folder and open your terminal interface then set path to the folder where the project files were extracted after that execute the following commands.
 
 ```bash
+  composer update
   cp .env.example .env
 ```
-It will copy the environment file ".env.example" with name .env so we can configure the fresh setup.
+It will update the required file and copy the environment file ".env.example" with name .env so we can configure the fresh setup.
 
 ```bash
   php artisan key:generate
