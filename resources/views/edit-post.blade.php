@@ -25,7 +25,7 @@ Edit post
                     <input type="text" name="title" id="title" class="hd_input" placeholder="Post title.." value="{{ $post_title }}" required>
                 </div>
                 <div class="hd_field_wrap description_wrap">
-                    <textarea name="description" id="description" class="hd_input" cols="30" rows="10" placeholder="Description here...">{{ $post_content }}</textarea>
+                    <textarea name="description" id="description" class="hd_post_editro_field hd_input" cols="30" rows="10" placeholder="Description here...">{{ $post_content }}</textarea>
                 </div>
             </div>
         </div>
