@@ -63,6 +63,45 @@ class PostController extends BaseController
             "posts"   => $posts,
         ));
     }
+
+
+    public function delete(Request $request)
+    {
+        $post_id = $request->input('post_id');
+        if (DB::table('post')->where('id', '=', $post_id)->delete()) {
+            return array(
+                "status"    => 200,
+                "message"   => "Post has been removed."
+            );
+        } else {
+            return array(
+                "status"    => 500,
+                "message"   => "Post not removed.",
+                "data"      => $post_id
+            );
+        }
+    }
+
+
+    /********************************
+     * STATIC METHODS START
+     */
+    public static function is_post_authorized($user_id, $post_id)
+    {
+        $user_id = Auth::user()->id;
+        $posts = DB::table('post')->select('*')->where('id', '=', $post_id)->where('user_id', '=', $user_id)->get();
+        if ($posts) {
+            return array(
+                "status"    => 200,
+                "message"   => "Authorized",
+            );
+        } else {
+            return array(
+                "status"    => 400,
+                "message"   => "Not Authorized",
+            );
+        }
+    }
     public static function get_all_posts($orderby = null, $limit = null, $user_id = null)
     {
         $orderby = $orderby ?: 'asc';
@@ -78,6 +117,10 @@ class PostController extends BaseController
             "status"    => 200,
             "message"   => "Fetched Successfuly",
             "post"   => $post,
+            "user_id" => $user_id
         );
     }
+    /**
+     * STATIC METHODS START END
+     ********************************/
 }

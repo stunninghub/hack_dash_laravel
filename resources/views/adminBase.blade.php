@@ -78,7 +78,7 @@
                 }
                 jQuery('.hd_confirm_pop').removeClass('active');
                 jQuery('.hd_confirm_title').text("");
-                console.log(jQuery._data(document.querySelector('.hd_confirm_positive'), "events"));
+                // console.log(jQuery._data(document.querySelector('.hd_confirm_positive'), "events"));
                 if (jQuery._data(document.querySelector('.hd_confirm_positive'), "events")) {
                     $('.hd_confirm_positive').off('click');
                 }

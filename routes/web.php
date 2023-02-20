@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController as AddPost;
 use App\Http\Controllers\UserMeta;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpKernel\DataCollector\AjaxDataCollector;
 
 /*
@@ -82,14 +83,20 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/post/edit/{id}', function ($id) {
+        $user_id = Auth::user()->id;
         $user_name = Auth::user()->name;
         $post = AddPost::get_post_by_id(($id));
-        $post_title = json_decode($post['post'], true)[0]['title'];
-        $post_content = json_decode($post['post'], true)[0]['content'];
-        $post_created_date = date('d M Y, h:i A', strtotime(json_decode($post['post'], true)[0]['created_at']));
-        $post_updated_date = date('d M Y, h:i A', strtotime(json_decode($post['post'], true)[0]['updated_at']));
-        return view('edit-post', compact('user_name', 'id', 'post_title', 'post_content', 'post_created_date', 'post_updated_date'));
+        if (!empty(json_decode($post['post']))) {
+            $post_title = json_decode($post['post'], true)[0]['title'];
+            $post_content = json_decode($post['post'], true)[0]['content'];
+            $post_created_date = date('d M Y, h:i A', strtotime(json_decode($post['post'], true)[0]['created_at']));
+            $post_updated_date = date('d M Y, h:i A', strtotime(json_decode($post['post'], true)[0]['updated_at']));
+            return view('edit-post', compact('user_name', 'id', 'post_title', 'post_content', 'post_created_date', 'post_updated_date'));
+        } else {
+            return Redirect::to('/post/new');
+        }
     })->name('edit_post');
+    
     Route::get('/post/new', function () {
         $user_name = Auth::user()->name;
         return view('new-post', compact('user_name'));
@@ -100,3 +107,4 @@ Route::group(['middleware' => ['auth']], function () {
 Route::any('/add_post', [AddPost::class, 'insert']);
 Route::any('/update_post', [AddPost::class, 'update']);
 Route::any('/get_posts', [AddPost::class, 'get_posts']);
+Route::any('/delete_post', [AddPost::class, 'delete']);

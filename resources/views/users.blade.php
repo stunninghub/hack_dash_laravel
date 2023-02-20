@@ -25,7 +25,7 @@ Users
                         <td class="hd_td">{{ $user->id }}</td>
                         <td class="hd_td">{{ $user->email }}
                             @if($user->id != $user_id)
-                            <span class="hd_dash_tbl_remove_user" hd-data-usr_id="{{ $user->id }}">
+                            <span class="hd_dash_tbl_remove_item hd_dash_tbl_remove_user" hd-data-usr_id="{{ $user->id }}">
                                 <img src="{{URL::asset('/assets/img/remove_user.svg')}}" alt="" style="pointer-events: none;">
                             </span>
                             @endif

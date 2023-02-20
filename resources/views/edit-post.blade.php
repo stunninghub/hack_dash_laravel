@@ -35,7 +35,6 @@ Edit post
 <script>
     $(document).on('submit', '#hd_post_edit_post_form', function(e) {
         e.preventDefault();
-        console.log("Clicked");
         let this_form = $(this);
         let form_data = new FormData(this_form.get(0));
         $.ajax({
@@ -52,7 +51,6 @@ Edit post
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         }).done((res) => {
-            console.log(res);
             res = JSON.parse(res);
             if (res['status'] == 200) {
                 this_form.find('button[type=submit]').text('Updated');

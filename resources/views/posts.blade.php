@@ -23,7 +23,14 @@ Posts
                 @foreach($posts as $post)
                 <tr class="hd_tr">
                     <td class="hd_td">{{ $post->id }}</td>
-                    <td class="hd_td"><a href="/post/edit/{{ $post->id }}">{{ $post->title }}</a></td>
+                    <td class="hd_td">
+                        <a href="/post/edit/{{ $post->id }}">
+                            {{ $post->title }}
+                        </a>
+                        <span class="hd_dash_tbl_remove_item hd_dash_tbl_remove_post" hd-data-post_id="{{ $post->id }}">
+                            <img src="{{URL::asset('/assets/img/bin.svg')}}" alt="" style="pointer-events: none;">
+                        </span>
+                    </td>
                     <td class="hd_td">{{ $post->created_at }}</td>
                     <td class="hd_td">{{ $post->updated_at }}</td>
                 </tr>
@@ -54,12 +61,37 @@ Posts
 
 
 <script>
+    jQuery('.hd_dash_tbl_remove_post').click(function(e) {
+        e.preventDefault();
+        var this_btn = jQuery(this);
+        var this_post_id = jQuery(this).attr('hd-data-post_id');
+        hd_confirm('You realy want to delete this post?', function() {
+            jQuery.ajax({
+                url: "/delete_post",
+                type: "POST",
+                data: {
+                    post_id: this_post_id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            }).done((res) => {
+                if (res['status'] == 200) {
+                    this_btn.parent().parent().remove();
+                } else {
+                    console.log(res);
+                }
+            }).fail((err) => {
+                console.log(err);
+            })
+        })
+    });
+
     jQuery('#hd_add_new_post_form input, #hd_add_new_post_form textarea').on('keyup', function() {
         jQuery('#hd_add_new_post_form button[type=submit]').text('Publish');
     });
     $(document).on('submit', '#hd_add_new_post_form', function(e) {
         e.preventDefault();
-        console.log("Clicked");
         let this_form = $(this);
         let form_data = new FormData(this_form.get(0));
         $.ajax({
@@ -96,7 +128,6 @@ Posts
             } else {
                 console.log(res);
             }
-            console.log(res);
         }).fail((err) => {
             console.log(err);
         })
