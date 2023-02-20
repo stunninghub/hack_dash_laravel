@@ -1,5 +1,6 @@
-
 # Hack Dash Laravel
+[![Updated](https://img.shields.io/badge/last%20modified-today-shamrock)]() [![Dashboard](https://img.shields.io/badge/type-dashboard-red)]()
+
 
 Hi there! This project would be helpful for the freshers who are building there first project in laravel. This project contains the basic features of content management system. You can install this project at your local server in just few steps.
 
