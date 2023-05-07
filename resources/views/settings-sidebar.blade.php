@@ -9,6 +9,9 @@
         <li @if($subpage == 'profile')class="active"@endif >
             <a href="/settings/profile">Profile</a>
         </li>
+        <li @if($subpage == 'api')class="active"@endif >
+            <a href="/settings/api">API</a>
+        </li>
         <li @if($subpage == 'privecy')class="active"@endif >
             <a href="/settings/privecy">Privecy</a>
         </li>

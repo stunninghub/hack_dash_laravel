@@ -69,11 +69,11 @@ class AjaxController extends BaseController
             // ]);
             // if (Auth::attempt($credentials)) {
             //     $request->session()->regenerate();
-                return array(
-                    "status"    => 200,
-                    "message"   => "Logged In.",
-                    "redirect"   => "/"
-                );
+            return array(
+                "status"    => 200,
+                "message"   => "Logged In.",
+                "redirect"   => "/"
+            );
             // } else {
             //     return array(
             //         "status"    => 500,
@@ -102,5 +102,58 @@ class AjaxController extends BaseController
                 "message"   => "User not removed."
             );
         }
+    }
+
+    public function generate_api_token(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $api_token = md5(uniqid('hack_api_').time());
+        $created_at = date('Y-m-d H:i:s');
+        $updated_at = date('Y-m-d H:i:s');
+
+        $existing_api_res = DB::table('hack_dash_apis')->select('api_token')->where('user_id', '=', $user_id)->get('api_token');
+
+        if(isset($existing_api_res[0])){
+            $data = array("api_token" => $api_token, "updated_at" => $updated_at);
+            if ($id = DB::table('hack_dash_apis')->where('user_id', '=', $user_id)->update($data)) {
+                echo json_encode(array(
+                    "status"    => 200,
+                    "message"   => "Token updated",
+                    "id"        => $id,
+                    "token"     => $api_token
+                ));
+            }
+        } else {
+            $data = array('user_id' => $user_id, "api_token" => $api_token, "created_at" => $created_at, "updated_at" => $updated_at);
+            if ($id = DB::table('hack_dash_apis')->insertGetId($data)) {
+                echo json_encode(array(
+                    "status"    => 200,
+                    "message"   => "Token generated",
+                    "id"        => $id,
+                    "token"     => $api_token
+                ));
+            } else {
+                echo json_encode(array(
+                    "status"    => 500,
+                    "message"   => "Token failed to generate",
+                ));
+            }
+        }
+    }
+
+    public static function get_current_api_token()
+    {
+        $user_id = Auth::user()->id;
+        $api_token_res = DB::table('hack_dash_apis')->select('api_token')->where('user_id', '=', $user_id)->get('api_token');
+        if(isset($api_token_res[0])){
+            return $api_token_res[0]->api_token;
+        }else{
+            return '';
+        }
+        // return json_encode(array(
+        //     "status"    => 200,
+        //     "message"   => "Fetched Successfuly",
+        //     "posts"   => $api_token,
+        // ));
     }
 }

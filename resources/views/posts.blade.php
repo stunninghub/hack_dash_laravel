@@ -5,10 +5,26 @@ Posts
 @endsection
 
 @section('content')
+
+@if($posts_num > 0)
 <h5 style="display: inline;margin-right: 10px;">All Posts</h5>
 <a href="/post/new" class="hd_btn_primary_lined hd_add_new_post_hold">Add new</a>
+@endif
 <div class="hd_mang_posts_table_wrap">
     <div class="hd_posts_table_inner">
+        @if($posts_num == 0)
+        <div class="hd_no_post_wrap">
+            <div class="hd_create_first_post_wrap">
+                <div class="main_title">
+                    <h2>Publish your first post</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+                <div class="hd_ctas_wrap">
+                    <a href="/post/new" class="hd_btn_primary">Create post</a>
+                </div>
+            </div>
+        </div>
+        @else
         <table class="hd_posts_table">
             <thead class="hd_table_head">
                 <tr class="hd_tr">
@@ -37,6 +53,7 @@ Posts
                 @endforeach
             </tbody>
         </table>
+        @endif
     </div>
 </div>
 

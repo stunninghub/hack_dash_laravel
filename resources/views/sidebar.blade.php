@@ -24,5 +24,8 @@ $crnt_path = Route::current()->getName()
         <li>
             <a href="/settings" @if($crnt_path=='settings' )class="active" @endif><span class="menu_icon"><img src="{{URL::asset('/assets/img/settings.svg')}}"></span><span class="menu_label">Settings</span></a>
         </li>
+        <!-- <li>
+            <a href="/settings" @if($crnt_path=='api' )class="active" @endif><span class="menu_icon"><img src="{{URL::asset('/assets/img/api.svg')}}"></span><span class="menu_label">API</span></a>
+        </li> -->
     </ul>
 </div>

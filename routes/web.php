@@ -31,6 +31,8 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 })->name('register');
+
+Route::any('/generate_api', [MainAjax::class, 'generate_api_token']);
 Route::any('/ajax_login_attempt', [MainAjax::class, 'hd_login']);
 Route::any('/ajax_reg_attempt', [MainAjax::class, 'hd_register']);
 Route::any('/delete_user', [MainAjax::class, 'delete_user']);
@@ -47,7 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
         $user_name = Auth::user()->name;
         $user_id = Auth::user()->id;
         $posts = AddPost::get_all_posts('asc', -1, $user_id);
-        return view('posts', compact('posts', 'user_name'));
+        $posts_num = count($posts);
+        return view('posts', compact('posts', 'user_name', 'posts_num'));
     })->name('posts');
     Route::get('/users', function () {
         $user_name = Auth::user()->name;
@@ -65,9 +68,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/settings/{subpage}', function ($subpage) {
         $user_name = Auth::user()->name;
+        $current_api_token = MainAjax::get_current_api_token();
         switch ($subpage) {
             case "profile":
                 return view('settings-profile', compact('user_name', 'subpage'));
+                break;
+            case "api":
+                return view('settings-api', compact('user_name', 'subpage', 'current_api_token'));
                 break;
             default:
                 return view('settings', compact('user_name', 'subpage'));

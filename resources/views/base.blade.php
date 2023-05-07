@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{URL::asset('/assets/css/darkstyle.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         body {
             font-family: 'Nunito', sans-serif;
